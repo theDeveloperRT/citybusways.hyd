@@ -21,6 +21,7 @@
             <img src="images/icons/searchBlack.png" alt="Icon">
             <input type="text" name="searchBar" id="input1" placeholder="Search By Route No..."
                 oninput="showSuggesions(this)" autocomplete="off">
+            <img src="images/icons/closeBlack.png" alt="Icon" class="hide" onclick="clearInputs(this)" id="clear1">
         </li>
         <li class="swapIconContainer hide" id="swapIconContainer"><img class="centerRow swapIcon"
                 src="images/icons/swapWhite.png" alt="swapIcon" onclick="swapInputValues()">
@@ -29,6 +30,7 @@
             <img src="images/icons/searchBlack.png" alt="Icon">
             <input type="text" name="searchBar" id="input2" placeholder="Travelling To..."
                 oninput="showSuggesions(this)" autocomplete="off">
+            <img src="images/icons/closeBlack.png" alt="Icon" class="hide" onclick="clearInputs(this)" id="clear2">
         </li>
 
     </div>
@@ -217,7 +219,7 @@
 
     <div class="OutputScreen close" id="OutputScreen">
         <div class="header">
-            <li class="menuIcon centerRow" onclick="closeOutputScreen()">
+            <li class="menuIcon centerRow" onclick="closeOutputScreen(this)">
                 <svg viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#FFF">
                     <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                     <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -233,6 +235,7 @@
                 <p id="StopNameSub">ARADHANA THEATER</p>
             </div>
         </div>
+
         <div class="contentOutputScreen" id="outputBusStopPart1">
             <div class="section">
                 <h2>Regular Routes</h2>
@@ -303,6 +306,34 @@
                 </ul>
             </div>
         </div>
+
+
+    </div>
+
+    <div class="OutputScreen close" id="OutputScreen2">
+        <div class="header">
+            <li class="menuIcon centerRow" onclick="closeOutputScreen(this)">
+                <svg viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#FFF">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path d="M768 903.232l-50.432 56.768L256 512l461.568-448 50.432 56.768L364.928 512z"
+                            fill="#FFF">
+                        </path>
+                    </g>
+                </svg>
+            </li>
+            <div class="centerCol routesContainerOutput" id="output2RouteHolder">
+                <h2 id="route1No">17H</h2>
+                <hr>
+                <h2 id="route2No">127KL</h2>
+            </div>
+        </div>
+
+        <div class="contentOutputScreen " id="outputRoutes">
+
+        </div>
+
     </div>
 
     <ul class="suggessionsList" id="suggessionsList">
