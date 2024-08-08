@@ -8,16 +8,27 @@ let routeSection2 = getId('routeSection2');
 let PPbusStations = getId('PPbusStations');
 
 let OutputScreen = getId('OutputScreen');
+let OutputScreen2 = getId('OutputScreen2');
 let outputBusStopPart1 = getId('outputBusStopPart1');
 let outputBusStopPart2 = getId('outputBusStopPart2');
 
-// FONT SIZE HANDLING HANDLES
+
+// Font Size Handling Handles
 let StopNameHead = getId('StopNameHead');
 let StopNameSub = getId('StopNameSub');
 
-// Suggesions List
+// Route Output Screen Handles
+let output2RouteHolder = getId('output2RouteHolder');
+let route1No = getId('route1No');
+let route2No = getId('route2No');
+
+// Input Handles
 let input1 = getId('input1');
 let input2 = getId('input2');
+let clear1 = getId('clear1');
+let clear2 = getId('clear2');
+
+// Suggesions List
 let suggessionsList = getId('suggessionsList');
 
 // From to Section Handles
@@ -27,6 +38,7 @@ let FromToSuggesions = getId('FromToSuggesions');
 
 // Referance Arrays and Variables
 let suggessionsArray = routesArray;
+let feature = 1;
 
 function navigation(ref) {
     removeActiveLinks();
@@ -41,6 +53,7 @@ function navigation(ref) {
             routeSection2.classList.remove('close');
 
             suggessionsArray = routesArray;
+            feature = 1;
             break;
         case 2:
             // Bus Stop
@@ -48,6 +61,7 @@ function navigation(ref) {
             PPbusStations.classList.remove('close');
 
             suggessionsArray = SHD;
+            feature = 2;
             break;
         case 3:
             // From - To
@@ -57,6 +71,7 @@ function navigation(ref) {
             input1.setAttribute('placeholder', 'Travelling From...');
 
             suggessionsArray = SHD;
+            feature = 3;
             break;
         case 4:
             // Fare Chart
@@ -66,6 +81,7 @@ function navigation(ref) {
             input1.setAttribute('placeholder', 'Travelling From...');
 
             suggessionsArray = SHD;
+            feature = 4;
             break;
 
         default:
@@ -91,6 +107,7 @@ function menuItemsClick(ref) {
             input1.setAttribute('placeholder', 'Travelling From...');
 
             suggessionsArray = SHD;
+            feature = 5;
             break;
 
         default:
@@ -105,14 +122,45 @@ function hideHomeScreenSections() {
     routeSection2.classList.add('close');
     PPbusStations.classList.add('close');
     FromToSuggesions.classList.add('hide');
-    suggessionsList.classList.add('hide');
+    clear1.classList.add('hide');
+    clear2.classList.add('hide');
     suggessionsList.innerHTML = "";
     input1.value = '';
     input2.value = '';
 }
+function viewRoute(ref) {
+    // To Be Hide
+    OutputScreen2.classList.remove('close');
+    suggessionsList.innerHTML = "";
+    clear1.classList.add('hide');
+    input1.value = '';
+    input2.value = '';
 
+    if (ref.innerHTML.includes("/")) {
+        if (ref.innerHTML == "1/25S/229") {
+            ref = ref.innerText.split('/');
+            output2RouteHolder.classList.add('doubleRoute');
+            route1No.innerHTML = ref[0] + "/" + ref[1];
+            route2No.innerHTML = ref[2];
+        } else {
+            ref = ref.innerText.split('/');
+            output2RouteHolder.classList.add('doubleRoute');
+            route1No.innerHTML = ref[0];
+            route2No.innerHTML = ref[1];
+        }
+    } else {
+        output2RouteHolder.classList.remove('doubleRoute');
+        route1No.innerHTML = ref.innerHTML;
+    }
+}
 function viewStop(ref) {
+    // To Be Hide
     OutputScreen.classList.remove('close');
+    suggessionsList.innerHTML = "";
+    clear1.classList.add('hide');
+    input1.value = '';
+    input2.value = '';
+
     let main;
     let sub;
     if (ref.value == 1) {
@@ -175,7 +223,13 @@ function handleFontSize(ref, subref) {
 
 function showSuggesions(ref) {
     const filterValue = ref.value.toUpperCase();
-    const filteredArray = suggessionsArray.filter((item) =>
+    let filteredArray = []
+    if (ref.value.length == 0) {
+        ref.parentNode.children[2].classList.add('hide');
+    } else {
+        ref.parentNode.children[2].classList.remove('hide');
+    }
+    filteredArray = suggessionsArray.filter((item) =>
         item.toUpperCase().startsWith(filterValue)
     );
     displayList(filteredArray);
@@ -184,11 +238,15 @@ function showSuggesions(ref) {
 function displayList(filteredArray) {
     suggessionsList.style.display = "flex";
     suggessionsList.innerHTML = "";
-
     filteredArray.forEach((item) => {
         const listItem = document.createElement("li");
         listItem.textContent = item;
-        listItem.setAttribute('onclick', 'viewRoute(this)');
+        if (feature == 1) {
+            listItem.setAttribute('onclick', 'viewRoute(this)');
+        } else if (feature == 2) {
+            listItem.setAttribute('onclick', 'viewStop(this)');
+        } else if (feature == 3) {
+        }
         suggessionsList.appendChild(listItem);
     });
 }
@@ -205,7 +263,12 @@ function createListDropDown(dataArray, List, Mode) {
         List.appendChild(listItem);
     });
 }
-
+function clearInputs(ref) {
+    ref.parentNode.children[1].value = '';
+    ref.classList.add('hide');
+    suggessionsList.innerHTML = '';
+    ref.parentNode.children[1].focus();
+}
 function swapInputValues() {
     let temp;
     temp = input1.value;
@@ -217,8 +280,8 @@ function openMenu() {
     sideScreenMenu.classList.toggle('open');
 }
 
-function closeOutputScreen() {
-    OutputScreen.classList.add('close');
+function closeOutputScreen(ref) {
+    ref.parentNode.parentNode.classList.add('close');
 }
 
 function removeActiveLinks() {
