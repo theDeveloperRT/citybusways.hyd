@@ -9,9 +9,15 @@ let PPbusStations = getId('PPbusStations');
 
 let OutputScreen = getId('OutputScreen');
 let OutputScreen2 = getId('OutputScreen2');
+let OutputScreen3 = getId('OutputScreen3');
 let outputBusStopPart1 = getId('outputBusStopPart1');
 let outputBusStopPart2 = getId('outputBusStopPart2');
 
+let junctionStopsHeading = getId('junctionStopsHeading');
+let avlBusStops = getId('avlBusStops');
+
+let regularRoutesOutput = getId('regularRoutesOutput');
+let rareRoutesOutput = getId('rareRoutesOutput');
 
 // Font Size Handling Handles
 let StopNameHead = getId('StopNameHead');
@@ -58,6 +64,7 @@ let downRouteDownSpan = getId('downRouteDownSpan');
 let downRouteDownIcon = getId('downRouteDownIcon');
 
 // Referance Arrays and Variables
+let JunctionStop, backState, JunctionStopState;
 let suggessionsArray = routesArray;
 let feature = 1;
 
@@ -6084,7 +6091,7 @@ function viewRoute(ref) {
                 stopHeadInList.innerHTML = DetailedRoutesUP[i][j];
                 stopSubHeadInList.innerHTML = DetailedRoutesUP[i][j];
 
-                listItem.setAttribute('onclick', 'viewStop(this)');
+                listItem.setAttribute('onclick', 'viewStopSender(this)');
 
                 listItem.appendChild(stopHeadInList);
                 listItem.appendChild(stopSubHeadInList);
@@ -6100,7 +6107,7 @@ function viewRoute(ref) {
                 stopHeadInList.innerHTML = DetailedRoutesDOWN[i][j];
                 stopSubHeadInList.innerHTML = DetailedRoutesDOWN[i][j];
 
-                listItem.setAttribute('onclick', 'viewStop(this)');
+                listItem.setAttribute('onclick', 'viewStopSender(this)');
 
                 listItem.appendChild(stopHeadInList);
                 listItem.appendChild(stopSubHeadInList);
@@ -7131,24 +7138,77 @@ function viewStop(ref) {
     clear1.classList.add('hide');
     input1.value = '';
     input2.value = '';
+
     let main;
     let sub;
     if (ref.value == 1) {
-        main = 'SECUNDERABAD';
-        sub = ref.innerHTML;
-        outputBusStopPart2.classList.add('hide');
-        outputBusStopPart1.classList.remove('hide');
-    } else if (ref.innerHTML.includes('CBS')) {
+        if (ref.innerHTML.includes('CBS')) {
+            main = 'CBS';
+            sub = 'CENTRAL BUS STATION';
+            outputBusStopPart2.classList.add('hide');
+            outputBusStopPart1.classList.remove('hide');
+            backState = 1;
+        } else if (JunctionStop == 'MG BUS STATION') {
+            main = 'MGBS';
+            sub = ref.innerHTML;
+            outputBusStopPart2.classList.add('hide');
+            outputBusStopPart1.classList.remove('hide');
+            backState = 1;
+        } else {
+            main = JunctionStop;
+            sub = ref.innerHTML;
+            outputBusStopPart2.classList.add('hide');
+            outputBusStopPart1.classList.remove('hide');
+            backState = 1;
+        }
+    }
+    else if (ref.innerHTML.includes('CBS') || ref.innerHTML == 'CITY BUS STATION') {
         main = 'CBS';
         sub = 'CENTRAL BUS STATION';
-    } else if (ref.innerHTML.includes('JBS')) {
+        outputBusStopPart2.classList.add('hide');
+        outputBusStopPart1.classList.remove('hide');
+    }
+    else if (ref.innerHTML.includes('JBS') || ref.innerHTML == 'JUBLIE BUS STATION') {
         main = 'JBS';
         sub = 'JUBLIE BUS STATION';
+        outputBusStopPart2.classList.add('hide');
+        outputBusStopPart1.classList.remove('hide');
+    }
+    else if (junctionStopsArray.includes(ref.innerHTML)) {
+        JunctionStop = ref.innerHTML;
+        JunctionStopState = ref;
+        if (JunctionStop == "MG BUS STATION") {
+            main = 'MGBS';
+        } else {
+            main = JunctionStop;
+        }
+        sub = '';
+        outputBusStopPart1.classList.add('hide');
+        outputBusStopPart2.classList.remove('hide');
+        avlBusStops.innerHTML = '';
+        junctionStopsHeading.innerHTML = 'Bus Stops in ' + JunctionStop.charAt(0).toUpperCase() + JunctionStop.slice(1).toLowerCase();;
+        let index = junctionStopsArray.indexOf(JunctionStop);
+
+        junctionStopsArrayStops[index].forEach(element => {
+            let listItem = document.createElement("li");
+            listItem.setAttribute('value', 1);
+            listItem.setAttribute('onclick', 'viewStop(this)');
+            listItem.textContent = element;
+            avlBusStops.appendChild(listItem);
+        });
+
     } else {
         main = ref.innerHTML;
         sub = '';
+        outputBusStopPart2.classList.add('hide');
+        outputBusStopPart1.classList.remove('hide');
     }
+
     handleFontSize(main, sub);
+}
+
+function viewStopSender(ref) {
+    viewStop(ref.children[0]);
 }
 
 function viewFromTo(ref) {
@@ -7202,6 +7262,10 @@ function handleFontSize(ref, subref) {
         StopNameSub.style.marginTop = "-10px";
     } else if (ref.length <= 16) {
         StopNameHead.style.fontSize = "28px";
+        StopNameHead.style.letterSpacing = "2px";
+        StopNameSub.style.marginTop = "-8px";
+    } else if (ref.length <= 20) {
+        StopNameHead.style.fontSize = "30px";
         StopNameHead.style.letterSpacing = "2px";
         StopNameSub.style.marginTop = "-8px";
     }
@@ -7267,7 +7331,12 @@ function openMenu() {
 }
 
 function closeOutputScreen(ref) {
-    ref.parentNode.parentNode.classList.add('close');
+    if (backState == 1) {
+        viewStop(JunctionStopState);
+        backState = 0;
+    } else {
+        ref.parentNode.parentNode.classList.add('close');
+    }
 }
 
 function removeActiveLinks() {
