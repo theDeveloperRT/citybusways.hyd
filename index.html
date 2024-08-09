@@ -239,64 +239,20 @@
         <div class="contentOutputScreen" id="outputBusStopPart1">
             <div class="section">
                 <h2>Regular Routes</h2>
-                <ul class="routesContainer centerRow">
-                    <li onclick="viewRoute(this)">3</li>
-                    <li onclick="viewRoute(this)">3K</li>
-                    <li onclick="viewRoute(this)">17H</li>
-                    <li onclick="viewRoute(this)">17D</li>
-                    <li onclick="viewRoute(this)">17DS</li>
-                </ul>
-                <ul class="routesContainer centerRow big">
-                    <li onclick="viewRoute(this)">241T</li>
-                    <li onclick="viewRoute(this)">242</li>
-                    <li class="blank"></li>
-                    <li class="blank"></li>
+                <ul class="routesContainer centerRow dynamic" id="regularRoutesOutput">
+
                 </ul>
             </div>
 
-            <div class="section">
+            <div class="section" id="rareRoutesOutput">
                 <h2>Rare/Special Routes</h2>
-                <ul class="routesContainer centerRow">
-                    <li onclick="viewRoute(this)">3D</li>
-                    <li onclick="viewRoute(this)">3H</li>
-                    <li onclick="viewRoute(this)">3KJ</li>
-                    <li onclick="viewRoute(this)">3L</li>
-                    <li onclick="viewRoute(this)">14P</li>
-                </ul>
-                <ul class="routesContainer centerRow">
-                    <li onclick="viewRoute(this)">15H</li>
-                    <li onclick="viewRoute(this)">15D</li>
-                    <li onclick="viewRoute(this)">15IG</li>
-                    <li onclick="viewRoute(this)">16PX</li>
-                    <li onclick="viewRoute(this)">90BE</li>
-                </ul>
-                <ul class="routesContainer centerRow big">
-                    <li onclick="viewRoute(this)">242A</li>
-                    <li onclick="viewRoute(this)">242B</li>
-                    <li onclick="viewRoute(this)">242G</li>
-                    <li onclick="viewRoute(this)">282K</li>
-                </ul>
-                <ul class="routesContainer centerRow big2">
-                    <li onclick="viewRoute(this)">3K/102B</li>
-                    <li onclick="viewRoute(this)">3K/242</li>
-                    <li onclick="viewRoute(this)">3K/252</li>
-                </ul>
-                <ul class="routesContainer centerRow big2">
-                    <li onclick="viewRoute(this)">3K/281</li>
-                    <li onclick="viewRoute(this)">17H/29B</li>
-                    <li onclick="viewRoute(this)">17H/219</li>
-                </ul>
-                <ul class="routesContainer centerRow big2">
-                    <li onclick="viewRoute(this)">3K/281</li>
-                    <li onclick="viewRoute(this)">17H/29B</li>
-                    <li onclick="viewRoute(this)">17H/219</li>
-                </ul>
+
             </div>
         </div>
 
         <div class="contentOutputScreen hide" id="outputBusStopPart2">
             <div class="section" id="avlBusStopsContainer">
-                <h2>Bus Stations in Secunderabad</h2>
+                <h2 id="junctionStopsHeading">Bus Stops in Secunderabad</h2>
                 <ul class="routesContainer centerCol big5" id="avlBusStops">
                     <li onclick="viewStop(this)" value="1">CHILKALGUDA X ROADS</li>
                     <li onclick="viewStop(this)" value="1">RETHIFILE BUS STATION</li>
@@ -330,10 +286,282 @@
             </div>
         </div>
 
-        <div class="contentOutputScreen " id="outputRoutes">
+        <div class="contentOutputScreen" id="outputRoutes">
+
+            <!-- UP ROUTE STRUCTURE -->
+            <div class="routeHolderOutputScreen" id="upRouteHolder">
+
+                <ul class="routeHeaderOutputScreen">
+                    <div class="text centerCol">
+                        <h3 id="upSource">SECUNDERABAD</h3>
+                        <p id="upViaList">TNK, LPT, HBCLY, MLY</p>
+                        <h3 id="upDestination">ECIL X ROADS</h3>
+                    </div>
+                    <div class="downArrowContainer centerRow">
+                        <span id="upRouteDownSpan">View Stops</span>
+                        <img src="images/icons/down_Arrow.png" alt="Icon" onclick="expandList(this)"
+                            id="upRouteDownIcon">
+                    </div>
+                </ul>
+
+                <ul class="routeStopsListOutputScreen" id="upRouteStopsList">
+                    <li>
+                        <h3>SECUNDERABAD</h3>
+                        <p>Blue Sea Hotel</p>
+                    </li>
+                    <li>
+                        <h3>ALUGADDA BHAVI</h3>
+                        <p>Railway Underpass</p>
+                    </li>
+                    <li>
+                        <h3>METTUGUDA</h3>
+                        <p>Metro Station || ICRISAT</p>
+                    </li>
+                    <li>
+                        <h3>TARNAKA</h3>
+                        <p>Ganesh Temple</p>
+                    </li>
+                    <li>
+                        <h3>WHITE HOUSE</h3>
+                        <p>St. Anns School</p>
+                    </li>
+                    <li>
+                        <h3>LALAPET</h3>
+                        <p>Shanthi Nagar Road</p>
+                    </li>
+                    <li>
+                        <h3>LALAPET (RAM THEATER)</h3>
+                        <p>Prof. Jayashankar Stadium</p>
+                    </li>
+                    <li>
+                        <h3>INDUSTRAIL ESTATE</h3>
+                        <p>RPF Training Center</p>
+                    </li>
+                    <li>
+                        <h3>ZTS X ROADS</h3>
+                        <p>Ion Digital Zone - Moula Ali</p>
+                    </li>
+                    <li>
+                        <h3>CARBON</h3>
+                        <p>Eveready Company</p>
+                    </li>
+                    <li>
+                        <h3>HB COLONY</h3>
+                        <p>Play Ground || First Phase</p>
+                    </li>
+                    <li>
+                        <h3>VASUNDARA COLLEGE</h3>
+                        <p>Mangapuram Kaman</p>
+                    </li>
+                    <li>
+                        <h3>INDIRA NAGAR</h3>
+                        <p>HB Colony || Second Phase</p>
+                    </li>
+                    <li>
+                        <h3>LAXMI NAGAR</h3>
+                        <p>HB Colony || Indira Nagar</p>
+                    </li>
+                    <li>
+                        <h3>MOULA ALI</h3>
+                        <p>Unani Dispensary || AMR Mall</p>
+                    </li>
+                    <li>
+                        <h3>SP NAGAR</h3>
+                        <p>Moula Ali || ECIL</p>
+                    </li>
+                    <li>
+                        <h3>ECIL X ROADS</h3>
+                        <p>Bus Station</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- DOWN ROUTE STRUCTURE -->
+            <div class="routeHolderOutputScreen" id="downRouteHolder">
+
+                <ul class="routeHeaderOutputScreen">
+                    <div class="text centerCol">
+                        <h3 id="downSource">SECUNDERABAD</h3>
+                        <p id="downViaList">TNK, LPT, HBCLY, MLY</p>
+                        <h3 id="downDestination">ECIL X ROADS</h3>
+                    </div>
+                    <div class="downArrowContainer centerRow">
+                        <span id="downRouteDownSpan">View Stops</span>
+                        <img src="images/icons/down_Arrow.png" alt="Icon" onclick="expandList(this)"
+                            id="downRouteDownIcon">
+                    </div>
+                </ul>
+
+                <ul class="routeStopsListOutputScreen hide">
+
+                    <li class="source">
+                        <div class="graphic centerCol">
+                            <span class="circle centerCol">1</span>
+                        </div>
+                        <div class="text">
+                            <h3>SECUNDERABAD</h3>
+                            <p>Blue Sea Hotel</p>
+                        </div>
+                    </li>
+                    <li class="line">
+                    </li>
+
+                    <li>
+                        <div class="graphic centerCol">
+                            <span class="circle centerCol">2</span>
+                        </div>
+                        <div class="text">
+                            <h3>ALUGADDA BHAVI</h3>
+                            <p>Secunderabad</p>
+                        </div>
+                    </li>
+                    <li class="line">
+                    </li>
+
+                    <li>
+                        <div class="graphic centerCol">
+                            <span class="circle centerCol">3</span>
+                        </div>
+                        <div class="text">
+                            <h3>METTUGUDA</h3>
+                            <p>Metro Station</p>
+                        </div>
+                    </li>
+                    <li class="line">
+                    </li>
+
+                    <li>
+                        <div class="graphic centerCol">
+                            <span class="circle centerCol">4</span>
+                        </div>
+                        <div class="text">
+                            <h3>TARNAKA</h3>
+                            <p>Ganesh Temple</p>
+                        </div>
+                    </li>
+                    <li class="line">
+                    </li>
+
+                    <li class="destination">
+                        <div class="graphic centerCol">
+                            <span class="circle centerCol">5</span>
+                        </div>
+                        <div class="text">
+                            <h3>LALAPET</h3>
+                            <p>Shanthi Nagar Road</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <ul class="routeStopsListOutputScreen" id="downRouteStopsList">
+                    <li>
+                        <h3>SECUNDERABAD</h3>
+                        <p>Blue Sea Hotel</p>
+                    </li>
+                    <li>
+                        <h3>ALUGADDA BHAVI</h3>
+                        <p>Railway Underpass</p>
+                    </li>
+                    <li>
+                        <h3>METTUGUDA</h3>
+                        <p>Metro Station || ICRISAT</p>
+                    </li>
+                    <li>
+                        <h3>TARNAKA</h3>
+                        <p>Ganesh Temple</p>
+                    </li>
+                    <li>
+                        <h3>WHITE HOUSE</h3>
+                        <p>St. Anns School</p>
+                    </li>
+                    <li>
+                        <h3>LALAPET</h3>
+                        <p>Shanthi Nagar Road</p>
+                    </li>
+                    <li>
+                        <h3>LALAPET (RAM THEATER)</h3>
+                        <p>Prof. Jayashankar Stadium</p>
+                    </li>
+                    <li>
+                        <h3>INDUSTRAIL ESTATE</h3>
+                        <p>RPF Training Center</p>
+                    </li>
+                    <li>
+                        <h3>ZTS X ROADS</h3>
+                        <p>Ion Digital Zone - Moula Ali</p>
+                    </li>
+                    <li>
+                        <h3>CARBON</h3>
+                        <p>Eveready Company</p>
+                    </li>
+                    <li>
+                        <h3>HB COLONY</h3>
+                        <p>Play Ground || First Phase</p>
+                    </li>
+                    <li>
+                        <h3>VASUNDARA COLLEGE</h3>
+                        <p>Mangapuram Kaman</p>
+                    </li>
+                    <li>
+                        <h3>INDIRA NAGAR</h3>
+                        <p>HB Colony || Second Phase</p>
+                    </li>
+                    <li>
+                        <h3>LAXMI NAGAR</h3>
+                        <p>HB Colony || Indira Nagar</p>
+                    </li>
+                    <li>
+                        <h3>MOULA ALI</h3>
+                        <p>Unani Dispensary || AMR Mall</p>
+                    </li>
+                    <li>
+                        <h3>SP NAGAR</h3>
+                        <p>Moula Ali || ECIL</p>
+                    </li>
+                    <li>
+                        <h3>ECIL X ROADS</h3>
+                        <p>Bus Station</p>
+                    </li>
+                </ul>
+            </div>
+
 
         </div>
 
+    </div>
+    <div class="OutputScreen close" id="OutputScreen3">
+        <div class="header">
+            <li class="menuIcon centerRow" onclick="closeOutputScreen(this)">
+                <svg viewBox="0 0 1024 1024" class="icon" version="1.1" xmlns="http://www.w3.org/2000/svg" fill="#FFF">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path d="M768 903.232l-50.432 56.768L256 512l461.568-448 50.432 56.768L364.928 512z"
+                            fill="#FFF">
+                        </path>
+                    </g>
+                </svg>
+            </li>
+            <div class="backgroundDec centerCol fromToOutputPart">
+                <h2 id="FromStopNameHead">GANDIMAISAMMA</h2>
+                <span>TO</span>
+                <h2 id="ToStopNameHead">LALAPET</h2>
+            </div>
+        </div>
+
+        <div class="contentOutputScreen" id="outputBusStopPart1">
+            <div class="section">
+                <h2>Regular Routes</h2>
+                <ul class="routesContainer centerRow dynamic" id="regularRoutesOutput">
+
+                </ul>
+            </div>
+
+            <div class="section" id="rareRoutesOutput">
+                <h2>Rare/Special Routes</h2>
+
+            </div>
+        </div>
     </div>
 
     <ul class="suggessionsList" id="suggessionsList">
