@@ -265,6 +265,18 @@ nav li.activeLink {
     width: 100%;
     justify-content: space-between;
     margin-top: 10px;
+    flex-wrap: wrap;
+    row-gap: 10px;
+}
+
+.section .routesContainer.dynamic {
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: start;
+}
+
+.section .routesContainer.dynamic li {
+    width: 31%;
 }
 
 .section .routesContainer li {
@@ -281,6 +293,18 @@ nav li.activeLink {
 
 .section .routesContainer li.blank {
     background-color: transparent;
+}
+
+.section .routesContainer li.sm {
+    width: 18%;
+}
+
+.section .routesContainer li.md {
+    width: 23.5%;
+}
+
+.section .routesContainer li.lg {
+    width: 30%;
 }
 
 .section .routesContainer.big li {
@@ -539,6 +563,175 @@ nav li.activeLink {
     display: none;
 }
 
+.routeHolderOutputScreen {
+    width: 98%;
+    margin: auto;
+    min-height: 0px;
+    max-height: 120px;
+    /* background-color: var(--shadeColor2); */
+    margin-top: 10px;
+    border-radius: 10px;
+    transition-duration: 0.3s;
+    overflow: hidden;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.6);
+    background-color: #F0E68C;
+    /* background-color: #b8c6ff; */
+}
+
+.routeHolderOutputScreen.expand {
+    max-height: 530px;
+    overflow: hidden;
+    padding-bottom: 10px;
+}
+
+.routeHolderOutputScreen .routeHeaderOutputScreen {
+    height: 120px;
+    width: 100%;
+    /* border-radius: 10px; */
+    background-color: #1f6798;
+    background-color: #ffde23;
+    /* background-color: var(--primaryColor); */
+    /* color: white; */
+}
+
+.routeHolderOutputScreen .routeHeaderOutputScreen .text {
+    width: 100%;
+    height: 78%;
+}
+
+.routeHolderOutputScreen .routeHeaderOutputScreen .text h3 {
+    font-size: 22px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    /* color: white; */
+}
+
+.routeHolderOutputScreen .routeHeaderOutputScreen .text p {
+    font-size: 14px;
+    font-weight: 600;
+    /* color: white; */
+    opacity: 0.8;
+}
+
+.routeHolderOutputScreen .routeHeaderOutputScreen .downArrowContainer {
+    width: 100%;
+    height: 20%;
+    gap: 5px;
+    justify-content: end;
+    /* color: white; */
+    opacity: 0.8;
+}
+
+.routeHolderOutputScreen .routeHeaderOutputScreen .downArrowContainer span {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.routeHolderOutputScreen .routeHeaderOutputScreen .downArrowContainer img {
+    height: 20px;
+    margin-right: 10px;
+    transition-duration: 0.2s;
+    /* filter: invert(1); */
+}
+
+.routeHolderOutputScreen .routeHeaderOutputScreen .downArrowContainer img.click {
+    transform: rotate(180deg);
+}
+
+.routeStopsListOutputScreen {
+    margin-top: 0px;
+    border-top: 2px dashed black;
+    height: 410px;
+    overflow: scroll;
+}
+
+.routeStopsListOutputScreen li {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    /* background-color: #03CA8F; */
+    margin-top: 10px;
+}
+
+.routeStopsListOutputScreen li h3 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.routeStopsListOutputScreen li p {
+    margin-top: -5px;
+    font-size: 14px;
+    /* opacity: 0.7; */
+    /* font-weight: bold; */
+}
+
+/* FROM TO SECTION STYLE */
+#OutputScreen3 .backgroundDec h2 {
+    font-size: 30px;
+    letter-spacing: 3px;
+}
+
+#OutputScreen3 .backgroundDec span {
+    font-weight: bold;
+    display: block;
+    font-size: 16px;
+    letter-spacing: 3px;
+}
+
+/* CODE FOR GRAPHICAL STOPS LIST STARTS */
+
+/* .routeStopsListOutputScreen li {
+    background-color: #03CA8F;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    height: 50px;
+    gap: 10px;
+    margin-top: -10px;
+}
+
+.routeStopsListOutputScreen li.source .graphic {
+    background-color: #F76B1F;
+}
+
+.routeStopsListOutputScreen li.destination .graphic {
+    background-color: #008827;
+}
+
+.routeStopsListOutputScreen li.line {
+    height: 40px;
+    width: 15px;
+    background-color: var(--primaryColor);
+    margin-top: -10px;
+    margin-left: 17px;
+}
+
+.routeStopsListOutputScreen li .graphic {
+    height: 50px;
+    width: 50px;
+    background-color: var(--primaryColor);
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+
+}
+
+.routeStopsListOutputScreen li .text h3 {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.routeStopsListOutputScreen li .text p {
+    margin-top: -5px;
+    font-size: 14px;
+} */
+
+/* CODE FOR GRAPHICAL STOPS LIST ENDS */
+
 #avlBusStopsContainer {
     margin-top: 10px;
 }
@@ -564,4 +757,15 @@ nav li.activeLink {
 #routeSection1.close,
 #routeSection2.close {
     display: none;
+}
+
+/* HANDLING Z INDEX */
+#OutputScreen.show,
+#OutputScreen2.show {
+    z-index: 1;
+}
+
+#OutputScreen.hide,
+#OutputScreen2.hide {
+    z-index: 0;
 }
